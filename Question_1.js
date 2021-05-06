@@ -1,22 +1,24 @@
 function solution(array) {
     var answer = [];
-    let temp = [];
+    let newArray = [];
   
     //begin loop for each array element
     array.forEach(e => {
+      console.log("ele",e)
         //split the word (string) into array 
       let stringSplit = e.split(' ');
+      console.log("stringSplit", stringSplit)
         //check if there is an 'Enter' word in the first element of the sentence
       if (stringSplit[0] === 'Enter') {
-        for (let i = 0; i < temp.length; i++) {
-            //assign 2nd and 3rd of splitted string into uid and username
-          if (temp[i].uid === stringSplit[1]) {
-            temp[i].username = stringSplit[2]
+        for (let i = 0; i < newArray.length; i++) {
+            //assign 2nd and 3rd of splitted string into uid and name
+          if (newArray[i].uid === stringSplit[1]) {
+            newArray[i].name = stringSplit[2]
           }
         };
-        // push object into temp
-        temp.push({
-          username: stringSplit[2],
+        // push object into newArray
+        newArray.push({
+          name: stringSplit[2],
           word: 'came in.',
           uid: stringSplit[1]
         });
@@ -24,10 +26,10 @@ function solution(array) {
         //check if there is an 'Leave' word in the first element of the sentence
       if (stringSplit[0] === 'Leave') {
         
-        temp.forEach(e => {
+        newArray.forEach(e => {
           if (e.uid === stringSplit[1]) {
-            temp.push({
-              username: e.username,
+            newArray.push({
+              name: e.name,
               word: 'has left.',
               uid: stringSplit[1]
             });
@@ -36,8 +38,9 @@ function solution(array) {
       }
         //check if there is an 'Change' word in the first element of the sentence
       if (stringSplit[0] === 'Change') {
+        
         let check = false;
-        temp.forEach(i => {
+        newArray.forEach(i => {
           if (i.uid === stringSplit[1]) {
             if (i.word === 'has left.') {
               check = false;
@@ -47,17 +50,17 @@ function solution(array) {
           }
         });
         if (check) {
-          for (let i = 0; i < temp.length; i++) {
-            if (temp[i].uid === stringSplit[1]) {
-              temp[i].username = stringSplit[2];
+          for (let i = 0; i < newArray.length; i++) {
+            if (newArray[i].uid === stringSplit[1]) {
+              newArray[i].name = stringSplit[2];
             }
           };
         }
       }
     });
   
-    temp.forEach(e => {
-      answer.push(e.username + ' ' + e.word);
+    newArray.forEach(e => {
+      answer.push(e.name + ' ' + e.word);
     });
   
     return answer;
