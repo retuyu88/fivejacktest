@@ -13,9 +13,10 @@ function solution(relation) {
               let temp1 = '';
               let temp2 = '';
               for (let h = counter; h <= counter + slip; h++) {
-                  console.log('satu',temp1,'dua',temp2)
+                  
                 temp1 += relation[i][h]
                 temp2 += relation[j][h]
+                // console.log('satu',temp1,'dua',temp2)
               }
               if (temp1 === temp2) {
                 check = false
