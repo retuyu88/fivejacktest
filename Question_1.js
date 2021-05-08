@@ -38,18 +38,20 @@ function solution(array) {
       }
         //check if there is an 'Change' word in the first element of the sentence
       if (stringSplit[0] === 'Change') {
-        
-        let check = false;
+        let login = false;
+        // check if the user login or logout
         newArray.forEach(i => {
           if (i.uid === stringSplit[1]) {
             if (i.word === 'has left.') {
-              check = false;
+              login = false;
             } else if (i.word === 'came in.') {
-              check = true;
+              login = true;
             }
           }
         });
-        if (check) {
+
+        // if someone came in and the uid equal the current string uid of newArray , replace the name of that record 
+        if (login) {
           for (let i = 0; i < newArray.length; i++) {
             if (newArray[i].uid === stringSplit[1]) {
               newArray[i].name = stringSplit[2];
